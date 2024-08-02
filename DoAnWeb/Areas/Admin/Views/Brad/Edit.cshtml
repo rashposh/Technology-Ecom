@@ -1,0 +1,37 @@
+﻿@model BradModel
+@{
+    ViewData["Title"] = "bard Edit";
+}
+<h4>Trang sửa brands</h4>
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input asp-for="Name" class="form-control" id="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Status</label>
+        <select asp-for="Status" class="form-control" asp-items="ViewBag.Brads">
+            <option value="1">hiển thị</option>
+            <option value="0">ẩn</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">sửa</button>
+
+</form>
+<a asp-action="Index"> quay trở lại trang danh sách thương hiệu</a>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description');
+    </script>
+}

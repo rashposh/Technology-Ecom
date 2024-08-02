@@ -1,0 +1,59 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product Listed";
+}
+<h4>Trang tạo sản phẩm</h4>
+<form asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input asp-for="Name" class="form-control" id="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input asp-for="Price" class="form-control" id="Price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control" id="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <select asp-for="Category" class="form-control" asp-items="ViewBag.Categories" id="Category">
+            <option value="">--choose a category--</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Brand">Brand</label>
+        <select asp-for="Brad" class="form-control" asp-items="ViewBag.Brands" id="Brand">
+            <option value="">--choose a brand--</option>
+        </select>
+        <span asp-validation-for="Brad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="ImageUpload">Image</label>
+        <input asp-for="ImageUpload" class="form-control" id="ImageUpload" type="file" />
+        <span asp-validation-for="ImageUpload" class="text-danger"></span>
+        <img id="imgpreview" class="pt-2" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<a asp-action="Index">Quay trở lại trang danh sách sản phẩm</a>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('Description');
+    </script>
+}

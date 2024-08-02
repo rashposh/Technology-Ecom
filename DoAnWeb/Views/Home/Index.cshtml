@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProductModel>
+
+<style>
+    .product-image-wrapper {
+        height: 500px;
+
+    }
+
+    .el {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+</style>
+
+<div class="d-flex">
+    <div class="col-sm-3">
+        @Html.Partial("_SidebarPartial")
+    </div>
+
+    <div class="col-sm-9 padding-right">
+        <div class="features_items">
+            <!--features_items-->
+            <h2 class="title text-center">Features Items</h2>
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4" style="border: 1px solid gray">
+                    <div style="padding-top: 2rem">
+                        <div class="single-products">
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">
+                                <div class="productinfo text-center" style="min-height: 350px">
+                                    <img src="~/media/Products/@item.Image" alt="@item.Name" width="100%" />
+                                    <h2>$@item.Price</h2>
+                                    <p class="el">Tên sản phẩm: @item.Name</p>
+                                    <p class="el">Danh mục: @item.Category.Name</p>
+                                    <p class="el">Thương hiệu: @item.Brad.Name</p>
+                                </div>
+                            </a>
+                            <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.Id" style="display: flex; justify-content:center">
+                                <i class="fa fa-shopping-cart"></i> Add to cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div><!--features_items-->
+    </div>
+
+</div>
+
